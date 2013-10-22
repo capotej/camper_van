@@ -90,6 +90,11 @@ module CamperVan
       # room.leave # let the timeout do it rather than being explicit!
     end
 
+    def leave
+      part
+      room.leave
+    end
+
     # Public: replies to a WHO command with a list of users for a campfire room,
     # including their nicks, names, and status.
     #
@@ -345,7 +350,7 @@ module CamperVan
             end
 
             if matched
-              body = message.body.sub(/^#{matched.name}/, matched.nick)
+              body = message.body.sub(/^#{Regexp.escape(matched.name)}/, matched.nick)
             else
               body = message.body
             end

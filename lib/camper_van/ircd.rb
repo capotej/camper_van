@@ -188,7 +188,7 @@ module CamperVan
     handle :part do |args|
       name = args.first
       if channel = channels[name]
-        channel.part
+        channel.leave
       else
         numeric_reply :err_notonchannel, "You're not on that channel"
       end
